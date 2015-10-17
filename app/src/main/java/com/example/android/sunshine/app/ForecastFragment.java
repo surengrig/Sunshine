@@ -64,15 +64,17 @@ public class ForecastFragment extends Fragment {
         // activity in AndroidManifest.xml
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
-            FetchWeatherTask weatherTask = new FetchWeatherTask();
-            weatherTask.execute("33033,us");
+            refreshForecast();
             return true;
         }
         return super.onOptionsItemSelected(item);
-
-
     }
 
+
+    private void refreshForecast() {
+        FetchWeatherTask weatherTask = new FetchWeatherTask();
+        weatherTask.execute("33033,us");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,19 +87,21 @@ public class ForecastFragment extends Fragment {
         // Create some dummy data for the ListView. Here is a sample weekly data
         // represented as "day, weather, high/low".
 
-        String[] forecastArray = {
-                "Mon - Sunny - 88/62",
-                "Tues - Cloudy - 85/79",
-                "Weds - Drizzle - 86/81",
-                "Thurs - Foggy - 88/80",
-                "Fri - Sunny - 90/82",
-                "Sat - Heavy Rain - 84/65",
-                "Sun - Sunny - 88/69"
-        };
+        // String[] forecastArray = {
+        //         "Mon - Sunny - 88/62",
+        //         "Tues - Cloudy - 85/79",
+        //         "Weds - Drizzle - 86/81",
+        //         "Thurs - Foggy - 88/80",
+        //         "Fri - Sunny - 90/82",
+        //         "Sat - Heavy Rain - 84/65",
+        //         "Sun - Sunny - 88/69"
+        // };
 
-        List<String> weekForecast = new ArrayList<String>(
-                Arrays.asList(forecastArray));
-
+        // List<String> weekForecast = new ArrayList<String>(
+        //         Arrays.asList(forecastArray));
+        List<String> weekForecast = new ArrayList<String>();
+        refreshForecast();
+                
         //Now that we have some dummy forecast data, create an ArrayAdapter.
         //The ArrayAdapter will take data from a source (like our dummy forecast)
         //and use it to populate the ListView it is attached to.
